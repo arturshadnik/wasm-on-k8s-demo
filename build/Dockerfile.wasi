@@ -1,0 +1,14 @@
+FROM --platform=$BUILDPLATFORM golang:1.24-alpine AS builder
+
+WORKDIR /app
+
+COPY go.mod go.mod
+COPY cmd/main.go cmd/main.go
+
+RUN CGO_ENABLED=0 GOOS=wasip1 GOARCH=wasm go build -a -o counter.wasm cmd/main.go
+
+FROM scratch AS production
+
+COPY --from=builder /app/counter.wasm /counter.wasm
+
+CMD ["/counter.wasm"] 
