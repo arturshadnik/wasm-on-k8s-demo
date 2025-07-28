@@ -3,6 +3,6 @@ apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
   - role: control-plane
   - role: worker
-    name: worker-1
+    image: quay.io/arturshadnik/kindest/wasm-node:v1.33.2
   - role: worker
-    name: worker-2
+    image: quay.io/arturshadnik/kindest/wasm-node:v1.33.2

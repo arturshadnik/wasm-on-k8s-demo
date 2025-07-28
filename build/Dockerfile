@@ -10,8 +10,8 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build -a -o counter cmd/mai
 
 FROM gcr.io/distroless/static:nonroot AS production
 
-COPY --from=builder /app/counter .
+COPY --from=builder /app/counter /counter
 
 USER 65532
 
-CMD ["./counter"] 
+CMD ["/counter"] 
